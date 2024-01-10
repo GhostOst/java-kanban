@@ -1,17 +1,11 @@
+package com.yandex.app.model;
+
 public class SubTask extends Task {
     private long epicId;
 
-    public SubTask() {
-    }
-
-    public SubTask(String task, Status status, long Epicid) {
-        super(task, status);
-        setStatus(status);
-        setEpicId(Epicid);
-    }
-
-    public SubTask(String task, Status status, long Epicid, long id) {
-        super(task, status);
+    public SubTask(String task, String description, Status status, long Epicid) {
+        super(task, description);
+        this.type = TaskType.SUBTASK;
         setStatus(status);
         setEpicId(Epicid);
         setId(id);
@@ -27,11 +21,12 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return "SubTask {" +
+        return "com.yandex.app.model.SubTask {" +
                 "name ='" + getName() +
                 ", status =" + getStatus() +
                 ", id =" + getId() +
                 ", epic_id =" + epicId +
+                ", tasktype =" + type +
                 '}';
     }
 }

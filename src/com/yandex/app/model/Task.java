@@ -1,47 +1,19 @@
+package com.yandex.app.model;
+
 public class Task {
-    private long id;
-    private String name;
-    private String description;
-    private Status status = Status.NEW;
+    protected long id;
+    protected String name;
+    protected String description;
+    protected TaskType type = TaskType.TASK;
+    protected Status status = Status.NEW;
 
-
-
-    public Task() {
-    }
-
-    public Task(String task, Status status) {
-        this.name = task;
-        this.status = status;
-        this.id = TasksManager.idGenerator();
-    }
-
-    public Task(String task, String description, Status status) {
-        this.name = task;
-        this.description = description;
-        this.status = status;
-        this.id = TasksManager.idGenerator();
-    }
-
-    public Task(String task, String description, Status status, long id) {
-        TasksManager.idGenerator();
-        this.name = task;
-        this.description = description;
-        this.status = status;
-        this.id = id;
-    }
 
     public Task(String task, String description) {
-        this.name = task;
-        this.description = description;
-        this.id = TasksManager.idGenerator();
-    }
-
-
-    public Task(String task, String description, long id) {
-        this.name = task;
-        this.description = description;
         this.id = id;
+        this.name = task;
+        this.description = description;
     }
+
 
     public String getName() {
         return name;
@@ -75,14 +47,18 @@ public class Task {
         return status;
     }
 
+    public TaskType getType() {
+        return type;
+    }
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "com.yandex.app.model.Task{" +
                 "name ='" + name +
                 ", description ='" + description +
                 ", id =" + id +
                 ", status ='" + status +
+                ", tasktype =" + type +
                 '}';
     }
 
