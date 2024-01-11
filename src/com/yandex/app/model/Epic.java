@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Epic extends Task {
-    public ArrayList<SubTask> subTasksList;
+    private ArrayList<SubTask> subTasksList;
 
     public Epic(String task, String description) {
         super(task, description);
