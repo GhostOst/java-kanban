@@ -1,5 +1,7 @@
 package com.yandex.app.model;
 
+import java.util.Objects;
+
 public class Task {
     protected long id;
     protected String name;
@@ -9,7 +11,6 @@ public class Task {
 
 
     public Task(String task, String description) {
-        this.id = id;
         this.name = task;
         this.description = description;
     }
@@ -69,6 +70,11 @@ public class Task {
         if (getClass() != compareObject.getClass()) return false;
         Task object = (Task) compareObject;
         return id == object.id && name.equals(object.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

@@ -7,13 +7,14 @@ import com.yandex.app.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class TasksManager {
     private long id = 0;
 
-    public HashMap<Long, Task> tasks = new HashMap<>();
-    public HashMap<Long, SubTask> subtasks = new HashMap<>();
-    public HashMap<Long, Epic> epics = new HashMap<>();
+    private HashMap<Long, Task> tasks = new HashMap<>();
+    private HashMap<Long, SubTask> subtasks = new HashMap<>();
+    private HashMap<Long, Epic> epics = new HashMap<>();
 
 
     private long idGenerator() {
@@ -39,9 +40,7 @@ public class TasksManager {
     public SubTask putSubTask(SubTask subTask) {
         long index = subTask.getEpicId();
         Epic update = epics.get(index);
-        ArrayList<SubTask> subTasks = new ArrayList<>();
-        subTasks.add(subTask);
-        update.setSubTasksList(subTasks);
+        update.setSubTasksList(subTask);
         subTask.setId(subtasks.size());
         subtasks.put(subTask.getId(), subTask);
         updateEpicStatus(update);
@@ -75,29 +74,29 @@ public class TasksManager {
 
     // обновление задачи
     public void updateTask(Task task) {
-        Task task1 = tasks.get(task.getId());
-        task1.setName(task.getName());
-        task1.setDescription(task.getDescription());
-        task1.setStatus(task.getStatus());
-        task1.setId(task.getId());
+        Task existedTask = tasks.get(task.getId());
+        existedTask.setName(task.getName());
+        existedTask.setDescription(task.getDescription());
+        existedTask.setStatus(task.getStatus());
+        existedTask.setId(task.getId());
     }
 
     // обновление эпика
     public void updateEpic(Epic epic) {
-        Epic epic1 = epics.get(epic.getId());
-        epic1.setName(epic.getName());
-        epic1.setDescription(epic.getDescription());
-        epic1.setStatus(epic.getStatus());
+        Epic existedEpic = epics.get(epic.getId());
+        existedEpic.setName(epic.getName());
+        existedEpic.setDescription(epic.getDescription());
+        existedEpic.setStatus(epic.getStatus());
     }
 
     // обновление подзадачи
     public void updateSubTask(SubTask subTask) {
         Epic epic = epics.get(subTask.getEpicId());
-        for (SubTask x : epic.getSubTasksList()) {
-            if (x.getId() == subTask.getId()) {
-                x.setName(subTask.getName());
-                x.setDescription(subTask.getDescription());
-                x.setStatus(subTask.getStatus());
+        for (SubTask existedSubTask : subtasks.values()) {
+            if (existedSubTask.getId() == subTask.getId()) {
+                existedSubTask.setName(subTask.getName());
+                existedSubTask.setDescription(subTask.getDescription());
+                existedSubTask.setStatus(subTask.getStatus());
             }
         }
         updateEpicStatus(epic);
@@ -207,7 +206,7 @@ public class TasksManager {
     // удаление ранее добавленных задач - EPICS
     public void removeAllEpics() {
         epics.clear();
-        removeAllSubtasks();
+        subtasks.clear();
     }
 
 }
