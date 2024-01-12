@@ -5,7 +5,8 @@ import com.yandex.app.model.Status;
 import com.yandex.app.model.SubTask;
 import com.yandex.app.model.Task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TasksManager {
     private long id = 0;
@@ -180,7 +181,7 @@ public class TasksManager {
             System.out.println("Невалидный айди");
         }
         epic = epics.remove(id);
-        subtasks.entrySet().removeIf(entry -> entry.getValue().getEpicId()==id);
+        subtasks.entrySet().removeIf(entry -> entry.getValue().getEpicId() == id);
         return epic;
     }
 
@@ -197,7 +198,7 @@ public class TasksManager {
     // удаление ранее добавленных задач - SUBTASKS
     public void removeAllSubtasks() {
         subtasks.clear();
-        for (Epic epic : epics.values()){
+        for (Epic epic : epics.values()) {
             epic.getSubTasksList().clear();
             updateEpic(epic);
         }
