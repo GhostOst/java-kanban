@@ -7,7 +7,6 @@ import com.yandex.app.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class TasksManager {
     private long id = 0;
@@ -91,13 +90,13 @@ public class TasksManager {
     }
 
     // обновление подзадачи
-    public void updateSubTask(SubTask subTask) {
+   public void updateSubTask(SubTask subTask) {
         SubTask existedSubTask = subtasks.get(subTask.getId());
-        Epic epic = epics.get(existedSubTask.getEpicId());
-        existedSubTask.setName(existedSubTask.getName());
-        existedSubTask.setDescription(existedSubTask.getDescription());
-        existedSubTask.setStatus(existedSubTask.getStatus());
-        existedSubTask.setId(existedSubTask.getId());
+        Epic epic = epics.get(subTask.getEpicId());
+        existedSubTask.setName(subTask.getName());
+        existedSubTask.setDescription(subTask.getDescription());
+        existedSubTask.setStatus(subTask.getStatus());
+        existedSubTask.setId(subTask.getId());
         updateEpicStatus(epic);
     }
 
