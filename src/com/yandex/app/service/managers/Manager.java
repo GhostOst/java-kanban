@@ -4,11 +4,15 @@ import com.yandex.app.service.inMemoryManager.InMemoryHistoryManager;
 import com.yandex.app.service.inMemoryManager.InMemoryTasksManager;
 
 public class Manager {
-    public static InMemoryTasksManager getDafault() {
+
+    private Manager() {
+    }
+
+    public static TaskManager getDafault() {
         return new InMemoryTasksManager();
     }
 
-    public static InMemoryHistoryManager getDefaultHistory() {
+    public static HistoryManager getDefaultHistory() {
         return new InMemoryHistoryManager();
     }
 }

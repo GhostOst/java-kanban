@@ -3,23 +3,38 @@ package com.yandex.app.service.inMemoryManager;
 import com.yandex.app.model.Task;
 import com.yandex.app.service.managers.HistoryManager;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private final List<Task> historyMemory = new ArrayList<>();
+
+    public InMemoryHistoryManager() {
+        getHistory();
+    }
+
+    private static final int SIZE = 10;
+    private final LinkedList<Task> historyMemory = new LinkedList<Task>() {
+    };
+
 
     @Override
     public void addMemory(Task task) {
+        if (task == null) {
+            System.out.println("Несуществующая задача");
+        }
         historyMemory.add(task);
-        if (historyMemory.size() > 10) {
-            historyMemory.remove(0);
+        remove();
+    }
+
+    private void remove() {
+        if (historyMemory.size() > SIZE) {
+            historyMemory.removeFirst();
         }
     }
 
     @Override
     public List<Task> getHistory() {
-        return historyMemory;
+        return List.copyOf(historyMemory);
     }
 }

@@ -69,7 +69,7 @@ public class Task {
         if (compareObject == null) return false;
         if (getClass() != compareObject.getClass()) return true;
         Task object = (Task) compareObject;
-        return id == object.id && name.equals(object.name);
+        return id == object.id;
     }
 
     @Override

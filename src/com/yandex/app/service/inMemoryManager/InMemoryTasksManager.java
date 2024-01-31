@@ -4,26 +4,34 @@ import com.yandex.app.model.Epic;
 import com.yandex.app.model.Status;
 import com.yandex.app.model.SubTask;
 import com.yandex.app.model.Task;
+import com.yandex.app.service.managers.HistoryManager;
 import com.yandex.app.service.managers.Manager;
 import com.yandex.app.service.managers.TaskManager;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class InMemoryTasksManager implements TaskManager {
-    public static InMemoryHistoryManager inMemoryHistoryManager = Manager.getDefaultHistory();
+    private final HistoryManager inMemoryHistoryManager = Manager.getDefaultHistory();
     private long id = 0;
 
-    private Map<Long, Task> tasks = new HashMap<>();
-    private Map<Long, SubTask> subtasks = new HashMap<>();
-    private Map<Long, Epic> epics = new HashMap<>();
+    private final Map<Long, Task> tasks = new HashMap<>();
+    private final Map<Long, SubTask> subtasks = new HashMap<>();
+    private final Map<Long, Epic> epics = new HashMap<>();
 
 
     private long idGenerator() {
         return id++;
     }
 
+    @Override
+    public List<Task> getHistory() {
+        return List.copyOf(inMemoryHistoryManager.getHistory());
+    }
+
+    @Override
     public void addHistory(Task task) {
         inMemoryHistoryManager.addMemory(task);
     }
@@ -51,7 +59,7 @@ public class InMemoryTasksManager implements TaskManager {
         long index = subTask.getEpicId();
         Epic update = epics.get(index);
         update.setSubTasksList(subTask);
-        subTask.setId(subtasks.size());
+        subTask.setId(idGenerator());
         subtasks.put(subTask.getId(), subTask);
         updateEpicStatus(update);
         return subTask;
@@ -117,20 +125,20 @@ public class InMemoryTasksManager implements TaskManager {
 
     // получение списка всех задач
     @Override
-    public ArrayList<Task> getAllTasks() {
-        return new ArrayList<>(tasks.values());
+    public List<Task> getAllTasks() {
+        return new LinkedList<>(tasks.values());
     }
 
     // получение списка всех эпиков
     @Override
-    public ArrayList<Epic> getAllEpics() {
-        return new ArrayList<>(epics.values());
+    public List<Epic> getAllEpics() {
+        return new LinkedList<>(epics.values());
     }
 
     //получение списка всех подзадач
     @Override
-    public ArrayList<SubTask> getAllSubTasks() {
-        return new ArrayList<>(subtasks.values());
+    public List<SubTask> getAllSubTasks() {
+        return new LinkedList<>(subtasks.values());
     }
 
     // получение TASK по айди
@@ -208,7 +216,8 @@ public class InMemoryTasksManager implements TaskManager {
 
     // получение списка всех подзадач у эпика
     @Override
-    public ArrayList<SubTask> getAllSubtaskInEpic(Epic epic) {
+    public List<SubTask> getAllSubtaskInEpic(long id) {
+        Epic epic = epics.get(id);
         return epic.getSubTasksList();
     }
 

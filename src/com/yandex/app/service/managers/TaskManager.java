@@ -4,9 +4,13 @@ import com.yandex.app.model.Epic;
 import com.yandex.app.model.SubTask;
 import com.yandex.app.model.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
+
+    List<Task> getHistory();
+
+    void addHistory(Task task);
 
     // добавление новой задачи TASK
     Task putTask(Task task);
@@ -27,13 +31,13 @@ public interface TaskManager {
     void updateSubTask(SubTask subTask);
 
     // получение списка всех задач
-    ArrayList<Task> getAllTasks();
+    List<Task> getAllTasks();
 
     // получение списка всех эпиков
-    ArrayList<Epic> getAllEpics();
+    List<Epic> getAllEpics();
 
     //получение списка всех подзадач
-    ArrayList<SubTask> getAllSubTasks();
+    List<SubTask> getAllSubTasks();
 
     // получение TASK по айди
     void getTaskId(long id);
@@ -54,7 +58,7 @@ public interface TaskManager {
     Epic deleteEpic(long id);
 
     // получение списка всех подзадач у эпика
-    ArrayList<SubTask> getAllSubtaskInEpic(Epic epic);
+    List<SubTask> getAllSubtaskInEpic(long epic);
 
     // удаление ранее добавленных задач - TASK
     void removeAllTasks();

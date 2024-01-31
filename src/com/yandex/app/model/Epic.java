@@ -1,22 +1,23 @@
 package com.yandex.app.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Epic extends Task {
-    private ArrayList<SubTask> subTasksList;
+    private final List<SubTask> subTasksList;
 
     public Epic(String task, String description) {
         super(task, description);
         this.type = TaskType.EPIC;
-        subTasksList = new ArrayList<>();
+        subTasksList = new LinkedList<>();
     }
 
     public void setSubTasksList(SubTask subTask) {
         subTasksList.add(subTask);
     }
 
-    public ArrayList<SubTask> getSubTasksList() {
+    public List<SubTask> getSubTasksList() {
         return subTasksList;
     }
 
@@ -28,7 +29,7 @@ public class Epic extends Task {
                 ", id =" + getId() +
                 ", status =" + getStatus() +
                 ", tasktype =" + type +
-                ", subTasksList ='" + Arrays.toString(new ArrayList[]{subTasksList}) + '\'' +
+                ", subTasksList ='" + Arrays.toString(new List[]{subTasksList}) + '\'' +
                 '}';
     }
 }
