@@ -3,11 +3,11 @@ package com.yandex.app.model;
 public class SubTask extends Task {
     private long epicId;
 
-    public SubTask(String task, String description, Status status, long Epicid) {
+    public SubTask(String task, String description, Status status, long epicId) {
         super(task, description);
         this.type = TaskType.SUBTASK;
         setStatus(status);
-        setEpicId(Epicid);
+        setEpicId(epicId);
         setId(id);
     }
 

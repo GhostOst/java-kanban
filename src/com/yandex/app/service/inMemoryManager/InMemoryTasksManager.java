@@ -28,14 +28,8 @@ public class InMemoryTasksManager implements TaskManager {
 
     @Override
     public List<Task> getHistory() {
-        return List.copyOf(inMemoryHistoryManager.getHistory());
+        return inMemoryHistoryManager.getHistory();
     }
-
-    @Override
-    public void addHistory(Task task) {
-        inMemoryHistoryManager.addMemory(task);
-    }
-
 
     // добавление новой задачи TASK
     @Override
@@ -149,7 +143,7 @@ public class InMemoryTasksManager implements TaskManager {
             System.out.println("Невалидный айди");
         } else {
             System.out.println(task);
-            addHistory(task);
+            inMemoryHistoryManager.addMemory(task);
         }
     }
 
@@ -161,7 +155,7 @@ public class InMemoryTasksManager implements TaskManager {
             System.out.println("Невалидный айди");
         } else {
             System.out.println(subTask);
-            addHistory(subTask);
+            inMemoryHistoryManager.addMemory(subTask);
         }
     }
 
@@ -173,7 +167,7 @@ public class InMemoryTasksManager implements TaskManager {
             System.out.println("Невалидный айди");
         } else {
             System.out.println(epic);
-            addHistory(epic);
+            inMemoryHistoryManager.addMemory(epic);
         }
     }
 

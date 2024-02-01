@@ -10,8 +10,6 @@ public interface TaskManager {
 
     List<Task> getHistory();
 
-    void addHistory(Task task);
-
     // добавление новой задачи TASK
     Task putTask(Task task);
 

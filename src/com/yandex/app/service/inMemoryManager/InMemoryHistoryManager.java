@@ -9,13 +9,8 @@ import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    public InMemoryHistoryManager() {
-        getHistory();
-    }
-
     private static final int SIZE = 10;
-    private final LinkedList<Task> historyMemory = new LinkedList<Task>() {
-    };
+    private final LinkedList<Task> historyMemory = new LinkedList<Task>();
 
 
     @Override
