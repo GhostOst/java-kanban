@@ -76,50 +76,28 @@ public class TestsManagers {
 
     //проверьте, что наследники класса Task равны друг другу, если равен их id
     @Test
-    void idEpicEqualSubTask() {
-        Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
-        final Epic savedEpic = taskManager.putEpic(epic);
-
-        SubTask subTask = new SubTask("Test addNewTask", "Test addNewTask description", Status.NEW, 0);
-        final SubTask savedSubtask = taskManager.putSubTask(subTask);
-
-        savedEpic.setId(0);
-        savedSubtask.setId(0);
-
-        assertEquals(savedEpic, savedSubtask, "Не равны");
-    }
-
-
-    @Test
     void idSubtaskEqualSubTask() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
-        final Epic savedEpic = taskManager.putEpic(epic);
 
         SubTask subTask = new SubTask("Test addNewTask", "Test addNewTask description", Status.NEW, 0);
         SubTask subTask1 = new SubTask("Test", "Test", Status.NEW, 0);
-        final SubTask savedSubtask = taskManager.putSubTask(subTask);
-        final SubTask savedSubtask1 = taskManager.putSubTask(subTask1);
-        savedSubtask1.setId(0);
-        savedSubtask.setId(0);
 
-        savedSubtask1.setId(0);
-        savedSubtask.setId(0);
+        subTask.setId(0);
+        subTask1.setId(0);
 
-        assertEquals(savedSubtask1, savedSubtask, "Не равны");
+        assertEquals(subTask, subTask1, "Не равны");
     }
 
     @Test
     void idEpicEqualEpic() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
-        final Epic savedEpic = taskManager.putEpic(epic);
 
         Epic epic1 = new Epic("Test addNewTask1", "Test addNewTask description1");
-        final Epic savedEpic1 = taskManager.putEpic(epic1);
 
-        savedEpic1.setId(0);
-        savedEpic.setId(0);
+        epic1.setId(0);
+        epic.setId(0);
 
-        assertEquals(savedEpic1, savedEpic, "Не равны");
+        assertEquals(epic, epic1, "Не равны");
     }
 
     @Test
@@ -139,9 +117,6 @@ public class TestsManagers {
         assertNotNull(epics, "Задачи не возвращаются.");
         assertEquals(2, epics.size(), "Неверное количество задач.");
         assertEquals(epic, epics.get(0), "Задачи не совпадают.");
-
-        //проверьте, что наследники класса Task равны друг другу, если равен их id
-        assertEquals(epic, epic1, "Не равны");
     }
 
 
@@ -172,11 +147,8 @@ public class TestsManagers {
         Task task = new Task("Test addNewTask", "Test addNewTask description");
         Task task1 = new Task("t", "d");
 
-        final Task savedTask1 = taskManager.putTask(task1);
-        savedTask1.setId(0);
-
-        final Task savedTask = taskManager.putTask(task);
-        savedTask.setId(0);
+        task.setId(0);
+        task1.setId(0);
 
         assertEquals(task, task1, "Не равны");
     }

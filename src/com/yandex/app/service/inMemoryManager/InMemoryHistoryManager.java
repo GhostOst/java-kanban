@@ -15,9 +15,6 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void addMemory(Task task) {
-        if (task == null) {
-            System.out.println("Несуществующая задача");
-        }
         historyMemory.add(task);
         remove();
     }
